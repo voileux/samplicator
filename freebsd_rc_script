@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# PROVIDE: samplicate
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="samplicate"
+rcvar=${name}_enable
+command=/usr/local/bin/samplicate
+#command_args="-f -p 162 -S 10.1.80.174/162 10.1.80.173/162"
+
+load_rc_config $name
+
+#
+# DO NOT CHANGE THESE DEFAULT VALUES HERE
+# SET THEM IN THE /etc/rc.conf FILE
+#
+
+: ${samplicate_enable-"NO"}
+: ${samplicate_pidfile-"/var/run/samplicate.pid"}
+: ${samplicate_flags=" -m ${samplicate_pidfile} -f ${samplicate_options} "}
+
+pidfile="${samplicate_pidfile}"
+
+run_rc_command "$1"
